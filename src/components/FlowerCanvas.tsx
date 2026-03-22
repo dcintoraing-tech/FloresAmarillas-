@@ -3,11 +3,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { FlowerParams } from '@/lib/flower-types';
 
-interface FlowerCanvasProps {
-  params: FlowerParams;
-  backgroundColor: string;
-}
-
 class FlowerInstance {
   x: number;
   y: number;
@@ -17,26 +12,28 @@ class FlowerInstance {
   petalCount: number;
   color: string;
   opacity: number;
+  stemColor: string;
 
   constructor(width: number, height: number) {
     this.x = Math.random() * width;
     this.y = Math.random() * height;
-    this.size = 15 + Math.random() * 30;
+    this.size = 18 + Math.random() * 25;
     this.rotation = Math.random() * Math.PI * 2;
     this.phase = Math.random() * Math.PI * 2;
-    this.petalCount = 5 + Math.floor(Math.random() * 3);
+    this.petalCount = 6 + Math.floor(Math.random() * 4);
     const yellowVariations = ['#EBCE47', '#F3D662', '#FADF7D', '#E2C439'];
     this.color = yellowVariations[Math.floor(Math.random() * yellowVariations.length)];
-    this.opacity = 0.6 + Math.random() * 0.4;
+    this.opacity = 0.7 + Math.random() * 0.3;
+    this.stemColor = '#4D7C0F'; // Un verde más oscuro y natural
   }
 
   update(width: number, height: number, params: FlowerParams, time: number) {
     const { speed, swayMagnitude, driftDirection, driftSpeed, pulseEffect } = params;
     
-    // Swaying
+    // Movimiento de balanceo
     this.rotation += Math.sin(time * 0.001 * speed + this.phase) * 0.005 * swayMagnitude;
     
-    // Drifting
+    // Movimiento de deriva
     let dx = 0;
     let dy = 0;
     const effectiveDrift = driftSpeed * speed * 0.5;
@@ -55,14 +52,14 @@ class FlowerInstance {
     this.x += dx;
     this.y += dy;
 
-    // Pulse effect
-    const pulse = 1 + Math.sin(time * 0.002 * speed + this.phase) * 0.1 * pulseEffect;
+    // Efecto de pulsación
+    const pulse = 1 + Math.sin(time * 0.002 * speed + this.phase) * 0.08 * pulseEffect;
 
-    // Wrap around screen
-    if (this.x < -this.size * 2) this.x = width + this.size;
-    if (this.x > width + this.size * 2) this.x = -this.size;
-    if (this.y < -this.size * 2) this.y = height + this.size;
-    if (this.y > height + this.size * 2) this.y = -this.size;
+    // Ajuste de pantalla infinita
+    if (this.x < -this.size * 3) this.x = width + this.size;
+    if (this.x > width + this.size * 3) this.x = -this.size;
+    if (this.y < -this.size * 3) this.y = height + this.size;
+    if (this.y > height + this.size * 3) this.y = -this.size;
 
     return pulse;
   }
@@ -75,27 +72,46 @@ class FlowerInstance {
     
     const s = this.size * pulse;
 
-    // Draw petals
+    // Dibujar el tallo (curvado para que se vea más natural)
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(s * 0.3, s * 1.5, s * 0.1, s * 3.5);
+    ctx.strokeStyle = this.stemColor;
+    ctx.lineWidth = s * 0.12;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Dibujar una pequeña hoja en el tallo
+    ctx.save();
+    ctx.translate(s * 0.2, s * 1.8);
+    ctx.rotate(Math.PI / 4);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, s * 0.3, s * 0.15, 0, 0, Math.PI * 2);
+    ctx.fillStyle = this.stemColor;
+    ctx.fill();
+    ctx.restore();
+
+    // Dibujar pétalos
     ctx.fillStyle = this.color;
     for (let i = 0; i < this.petalCount; i++) {
       ctx.beginPath();
-      ctx.ellipse(0, -s * 0.6, s * 0.4, s * 0.7, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, -s * 0.65, s * 0.45, s * 0.75, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.rotate((Math.PI * 2) / this.petalCount);
     }
 
-    // Draw center
+    // Dibujar centro de la flor
     ctx.beginPath();
-    ctx.arc(0, 0, s * 0.35, 0, Math.PI * 2);
+    ctx.arc(0, 0, s * 0.4, 0, Math.PI * 2);
     ctx.fillStyle = '#C4A000';
     ctx.fill();
     
-    // Tiny center dots
+    // Detalles del centro (estambres)
     ctx.fillStyle = '#E6C641';
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 6; i++) {
         ctx.beginPath();
-        const ang = (i * Math.PI * 2) / 5;
-        ctx.arc(Math.cos(ang) * s * 0.15, Math.sin(ang) * s * 0.15, s * 0.05, 0, Math.PI * 2);
+        const ang = (i * Math.PI * 2) / 6;
+        ctx.arc(Math.cos(ang) * s * 0.2, Math.sin(ang) * s * 0.2, s * 0.06, 0, Math.PI * 2);
         ctx.fill();
     }
 
@@ -119,8 +135,7 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // Re-initialize flowers on significant resize or just fill up
-      const count = Math.floor((canvas.width * canvas.height) / 15000) * params.density;
+      const count = Math.floor((canvas.width * canvas.height) / 18000) * params.density;
       flowersRef.current = Array.from({ length: count }, () => new FlowerInstance(canvas.width, canvas.height));
     };
 
@@ -130,8 +145,7 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Update count if density changed
-      const targetCount = Math.floor((canvas.width * canvas.height) / 15000) * params.density;
+      const targetCount = Math.floor((canvas.width * canvas.height) / 18000) * params.density;
       if (flowersRef.current.length !== targetCount) {
         if (flowersRef.current.length < targetCount) {
           const toAdd = targetCount - flowersRef.current.length;
@@ -146,27 +160,17 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
         flower.draw(ctx, pulse);
       });
 
-      requestRef.current = requestAnimFrame(animate);
+      requestRef.current = requestAnimationFrame(animate);
     };
 
-    const requestAnimFrame = (window.requestAnimationFrame || 
-      (window as any).webkitRequestAnimationFrame || 
-      (window as any).mozRequestAnimationFrame || 
-      (window as any).oRequestAnimationFrame || 
-      (window as any).msRequestAnimationFrame || 
-      function(callback: FrameRequestCallback) {
-        return window.setTimeout(callback, 1000 / 60);
-      }).bind(window);
-
-    requestRef.current = requestAnimFrame(animate);
+    requestRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(requestRef.current);
     };
-  }, [params.density]); // Re-init count logic on density change
+  }, [params.density]);
 
-  // Separate effect for background updates to avoid full canvas re-re-resize
   useEffect(() => {
     if (canvasRef.current) {
         canvasRef.current.style.backgroundColor = backgroundColor;
