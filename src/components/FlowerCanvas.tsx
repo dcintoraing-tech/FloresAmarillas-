@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useRef, useEffect } from 'react';
@@ -25,19 +24,16 @@ class FlowerInstance {
     const yellowVariations = ['#EBCE47', '#F3D662', '#FADF7D', '#E2C439'];
     this.color = yellowVariations[Math.floor(Math.random() * yellowVariations.length)];
     this.opacity = 0.6 + Math.random() * 0.4;
-    this.stemColor = '#3F6212'; // Verde bosque más profundo
+    this.stemColor = '#3F6212'; 
   }
 
   update(width: number, height: number, params: FlowerParams, time: number, deltaTime: number) {
     const { speed, swayMagnitude, driftDirection, driftSpeed, pulseEffect } = params;
     
-    // Ajuste de velocidad basado en tiempo real para evitar lag visual
     const timeFactor = deltaTime * 0.06; 
     
-    // Movimiento de balanceo (sway)
     this.rotation += Math.sin(time * 0.001 * speed + this.phase) * 0.002 * swayMagnitude * timeFactor;
     
-    // Movimiento de deriva (drift)
     let dx = 0;
     let dy = 0;
     const effectiveDrift = driftSpeed * speed * 0.5 * timeFactor;
@@ -56,10 +52,8 @@ class FlowerInstance {
     this.x += dx;
     this.y += dy;
 
-    // Efecto de pulsación
     const pulse = 1 + Math.sin(time * 0.002 * speed + this.phase) * 0.05 * pulseEffect;
 
-    // Ajuste de pantalla infinita con margen para evitar "popping"
     const margin = this.size * 5;
     if (this.x < -margin) this.x = width + margin;
     if (this.x > width + margin) this.x = -margin;
@@ -77,7 +71,6 @@ class FlowerInstance {
     
     const s = this.size * pulse;
 
-    // Dibujar el tallo
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.quadraticCurveTo(s * 0.3, s * 1.5, s * 0.1, s * 4);
@@ -86,7 +79,6 @@ class FlowerInstance {
     ctx.lineCap = 'round';
     ctx.stroke();
 
-    // Dibujar hoja
     ctx.save();
     ctx.translate(s * 0.2, s * 2);
     ctx.rotate(Math.PI / 4);
@@ -96,7 +88,6 @@ class FlowerInstance {
     ctx.fill();
     ctx.restore();
 
-    // Dibujar pétalos
     ctx.fillStyle = this.color;
     const petalAngle = (Math.PI * 2) / this.petalCount;
     for (let i = 0; i < this.petalCount; i++) {
@@ -106,10 +97,9 @@ class FlowerInstance {
       ctx.rotate(petalAngle);
     }
 
-    // Centro de la flor
     ctx.beginPath();
     ctx.arc(0, 0, s * 0.45, 0, Math.PI * 2);
-    ctx.fillStyle = '#A16207'; // Marrón ocre para el centro
+    ctx.fillStyle = '#A16207'; 
     ctx.fill();
     
     ctx.restore();
@@ -138,9 +128,9 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      const targetCount = Math.floor((canvas.width * canvas.height) / 25000) * params.density;
+      // Se aumenta el divisor de 25000 a 60000 para dar mucho más espacio entre flores
+      const targetCount = Math.floor((canvas.width * canvas.height) / 60000) * params.density * 2;
       
-      // En lugar de resetear, ajustamos la cantidad
       if (flowersRef.current.length < targetCount) {
         const toAdd = targetCount - flowersRef.current.length;
         for (let i = 0; i < toAdd; i++) {
@@ -154,7 +144,6 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // No re-inicializamos las flores aquí para evitar que desaparezcan
     };
 
     window.addEventListener('resize', handleResize);
@@ -164,7 +153,6 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       const deltaTime = time - lastTimeRef.current;
       lastTimeRef.current = time;
 
-      // Limpieza con color de fondo para evitar trails y mejorar rendimiento
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -182,7 +170,7 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(requestRef.current);
     };
-  }, [params.density, backgroundColor]); // Solo re-inicializamos si la densidad o el fondo cambian radicalmente
+  }, [params.density, backgroundColor]);
 
   return (
     <canvas

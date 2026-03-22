@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState } from 'react';
@@ -8,8 +7,8 @@ import { FlowerParams, BACKGROUND_OPTIONS } from '@/lib/flower-types';
 
 export default function Home() {
   const [params, setParams] = useState<FlowerParams>({
-    speed: 0.3, // Velocidad aún más tranquila
-    density: 0.8, // Menos densidad por defecto para mejor rendimiento
+    speed: 0.3, 
+    density: 0.4, // Se reduce la densidad a la mitad para que no estén tan juntas
     swayMagnitude: 0.4,
     driftDirection: 'random',
     driftSpeed: 0.03,
