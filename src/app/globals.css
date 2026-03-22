@@ -25,11 +25,6 @@
     --ring: 48 81% 60%;
     --radius: 1rem;
   }
-  .dark {
-    --background: 48 20% 10%;
-    --foreground: 43 67% 98%;
-    /* Dark mode could be implemented later if desired, for now we keep it light-focused */
-  }
 }
 
 @layer base {
@@ -39,6 +34,19 @@
   body {
     @apply bg-background text-foreground font-body;
   }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
 }
 
 .controls-overlay {

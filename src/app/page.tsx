@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FlowerCanvas } from '@/components/FlowerCanvas';
 import { ControlsOverlay } from '@/components/ControlsOverlay';
+import { Snoopy } from '@/components/Snoopy';
 import { FlowerParams, BACKGROUND_OPTIONS } from '@/lib/flower-types';
 
 export default function Home() {
@@ -32,13 +33,13 @@ export default function Home() {
         }}
       />
 
-      {/* Hero Header - Disappears on scroll/interaction if we had more content, but stays minimal here */}
-      <div className="pointer-events-none z-10 text-center space-y-2 select-none">
+      {/* Hero Header */}
+      <div className="pointer-events-none z-10 text-center space-y-2 select-none mb-20">
         <h1 className="text-6xl md:text-8xl font-headline font-bold text-primary drop-shadow-sm opacity-90 tracking-tight">
           SunnyBlooms
         </h1>
         <p className="text-foreground/60 text-lg md:text-xl font-medium">
-          A tranquil escape of animated golden petals.
+          Un escape tranquilo entre pétalos dorados.
         </p>
       </div>
 
@@ -47,6 +48,9 @@ export default function Home() {
         params={params} 
         backgroundColor={currentBg.color1} 
       />
+
+      {/* Snoopy Guest */}
+      <Snoopy />
 
       {/* UI Controls */}
       <ControlsOverlay 
@@ -58,7 +62,7 @@ export default function Home() {
 
       {/* Bottom hint */}
       <div className="fixed bottom-4 text-xs text-foreground/30 pointer-events-none font-medium">
-        Designed for serenity.
+        Diseñado para la serenidad.
       </div>
     </main>
   );
