@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react';
@@ -25,7 +26,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
       {/* Flor Gigante Sorpresa */}
       {showGiantFlower && (
         <div 
-          className="fixed inset-0 bg-white/40 backdrop-blur-xl z-[60] flex items-center justify-center pointer-events-auto cursor-pointer animate-in fade-in zoom-in duration-500"
+          className="fixed inset-0 bg-white/60 backdrop-blur-xl z-[60] flex items-center justify-center pointer-events-auto cursor-pointer animate-in fade-in zoom-in duration-500"
           onClick={() => setShowGiantFlower(false)}
         >
           <div className="relative">
@@ -53,7 +54,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
 
       {/* Carta de Amor */}
       <Card 
-        className={`controls-overlay border-[#6D5400]/20 shadow-2xl p-6 md:p-8 transition-all duration-700 ease-in-out transform pointer-events-auto max-w-lg w-full mx-4 relative overflow-y-auto max-h-[90vh] ${
+        className={`controls-overlay border-[#6D5400]/20 shadow-2xl p-6 md:p-8 transition-all duration-700 ease-in-out transform pointer-events-auto max-w-md w-full mx-4 relative overflow-y-auto max-h-[85vh] ${
           isOpen 
             ? 'opacity-100 scale-100' 
             : 'opacity-0 scale-90 -translate-y-20 pointer-events-none'
@@ -69,7 +70,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
         <div className="space-y-6 text-center">
           <div className="flex justify-center">
             <div className="bg-primary/20 p-4 rounded-full animate-pulse">
-              <Heart className="w-10 h-10 text-[#6D5400] fill-[#6D5400]" />
+              <Heart className="w-8 h-8 text-[#6D5400] fill-[#6D5400]" />
             </div>
           </div>
 
@@ -85,7 +86,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
                 agua ni sol, porque se alimentan de lo mucho que te amo. Estarán 
                 brillando siempre para recordarte lo especial que eres en mi vida.
               </p>
-              <p className="text-[#6D5400] text-lg md:text-xl italic border-t border-[#6D5400]/10 pt-4">
+              <p className="text-[#6D5400] text-lg italic border-t border-[#6D5400]/10 pt-4">
                 Te amo muchísimo. Eres la luz que ilumina mi mundo.
               </p>
             </div>
@@ -94,12 +95,12 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
           <div className="pt-4 flex flex-col gap-3 items-center">
             <Button 
               onClick={() => setShowGiantFlower(true)}
-              className="bg-primary text-[#6D5400] hover:bg-primary/80 h-14 w-14 rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-md mx-auto"
+              className="bg-primary text-[#6D5400] hover:bg-primary/80 h-12 w-12 rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-md mx-auto"
             >
-              <Sparkles className="w-6 h-6" />
+              <Sparkles className="w-5 h-5" />
             </Button>
             
-            <div className="flex items-center gap-2 text-xs font-bold text-[#6D5400] bg-primary/10 px-4 py-2 rounded-full mt-2">
+            <div className="flex items-center gap-2 text-[10px] font-bold text-[#6D5400] bg-primary/10 px-4 py-1.5 rounded-full mt-2 tracking-widest">
               <span>SIEMPRE JUNTOS</span>
             </div>
           </div>
@@ -108,13 +109,13 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
 
       {/* Botón Central */}
       {!isOpen && (
-        <div className="absolute top-[70%] left-1/2 -translate-x-1/2 pointer-events-auto">
+        <div className="absolute top-[75%] left-1/2 -translate-x-1/2 pointer-events-auto">
           <Button 
             onClick={() => setIsOpen(true)}
-            className="rounded-full shadow-2xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-6 py-3 h-auto font-bold flex flex-col gap-1 group transition-all hover:scale-110 active:scale-95 border-4 border-white/80 animate-bounce"
+            className="rounded-full shadow-xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-6 py-2.5 h-auto font-bold flex flex-col gap-1 group transition-all hover:scale-110 active:scale-95 border-2 border-white/50 animate-bounce"
           >
-            <Heart className="w-5 h-5 group-hover:scale-125 transition-transform fill-current" />
-            <span className="text-[10px] tracking-widest uppercase">Ver mi regalo</span>
+            <Heart className="w-4 h-4 group-hover:scale-125 transition-transform fill-current" />
+            <span className="text-[9px] tracking-widest uppercase">Ver mi regalo</span>
           </Button>
         </div>
       )}
