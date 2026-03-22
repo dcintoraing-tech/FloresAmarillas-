@@ -12,19 +12,17 @@ class FlowerInstance {
   petalCount: number;
   color: string;
   opacity: number;
-  stemColor: string;
 
   constructor(width: number, height: number) {
     this.x = Math.random() * width;
     this.y = Math.random() * height;
-    this.size = 12 + Math.random() * 18; // Flores un poco más pequeñas para que quepan más
+    this.size = 12 + Math.random() * 18;
     this.rotation = Math.random() * Math.PI * 2;
     this.phase = Math.random() * Math.PI * 2;
     this.petalCount = 6 + Math.floor(Math.random() * 3);
     const yellowVariations = ['#EBCE47', '#F3D662', '#FADF7D', '#E2C439'];
     this.color = yellowVariations[Math.floor(Math.random() * yellowVariations.length)];
     this.opacity = 0.7 + Math.random() * 0.3;
-    this.stemColor = '#3F6212'; 
   }
 
   update(width: number, height: number, params: FlowerParams, time: number, deltaTime: number) {
@@ -71,15 +69,6 @@ class FlowerInstance {
     
     const s = this.size * pulse;
 
-    // Dibujar tallo
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.quadraticCurveTo(s * 0.3, s * 1.5, s * 0.1, s * 4);
-    ctx.strokeStyle = this.stemColor;
-    ctx.lineWidth = s * 0.15;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-
     // Pétalos
     ctx.fillStyle = this.color;
     const petalAngle = (Math.PI * 2) / this.petalCount;
@@ -122,7 +111,7 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // Mucho más denso: bajamos el divisor a 12000 para que aparezcan muchas más flores
+      // Mantenemos la densidad alta: divisor 12000 para muchas flores
       const targetCount = Math.floor((canvas.width * canvas.height) / 12000 * params.density);
       
       if (flowersRef.current.length < targetCount) {
