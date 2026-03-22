@@ -42,7 +42,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
                   <Heart key={i} className={`w-8 h-8 text-red-500 fill-red-500 animate-bounce delay-${i * 100}`} />
                 ))}
               </div>
-              <p className="mt-8 text-3xl font-bold text-[#6D5400] text-center uppercase tracking-tighter">¡TE AMO NAO!</p>
+              <p className="mt-8 text-4xl font-bold text-[#6D5400] text-center uppercase tracking-tighter">¡TE AMO NAO!</p>
             </div>
           </div>
           <button className="absolute top-8 right-8 text-[#6D5400]">
@@ -74,13 +74,10 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
           </div>
 
           <div className="space-y-4">
-            <h2 className="font-headline font-bold text-2xl md:text-3xl text-[#6D5400]">
-              Un detalle para ti
-            </h2>
             <div className="space-y-4 text-[#4A3A00] font-bold leading-relaxed text-base md:text-lg">
-              <p className="text-xl">Holi boba,</p>
+              <p className="text-2xl font-headline text-[#6D5400]">Holi boba,</p>
               <p>
-                Hoy no pude estar allí para entregarte tus flores amarillas en mano, 
+                Hoy no pude estar allí para entregarte tus flores amarillas, 
                 pero no quería que pasara el día sin que tuvieras este detalle.
               </p>
               <p>
@@ -97,13 +94,12 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
           <div className="pt-4 flex flex-col gap-3 items-center">
             <Button 
               onClick={() => setShowGiantFlower(true)}
-              className="bg-primary text-[#6D5400] hover:bg-primary/80 font-bold px-6 py-4 h-auto rounded-full w-full flex gap-2 transition-transform hover:scale-105 active:scale-95 shadow-md"
+              className="bg-primary text-[#6D5400] hover:bg-primary/80 h-14 w-14 rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-md mx-auto"
             >
-              <Sparkles className="w-5 h-5" />
-              Recibir un regalo especial
+              <Sparkles className="w-6 h-6" />
             </Button>
             
-            <div className="flex items-center gap-2 text-xs font-bold text-[#6D5400] bg-primary/10 px-4 py-2 rounded-full">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#6D5400] bg-primary/10 px-4 py-2 rounded-full mt-2">
               <span>SIEMPRE JUNTOS</span>
             </div>
           </div>
@@ -112,13 +108,13 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
 
       {/* Botón Central */}
       {!isOpen && (
-        <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pointer-events-auto">
+        <div className="absolute top-[70%] left-1/2 -translate-x-1/2 pointer-events-auto">
           <Button 
             onClick={() => setIsOpen(true)}
-            className="rounded-full shadow-2xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-8 py-4 h-auto font-bold flex flex-col gap-1 group transition-all hover:scale-110 active:scale-95 border-4 border-white/80 animate-bounce"
+            className="rounded-full shadow-2xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-6 py-3 h-auto font-bold flex flex-col gap-1 group transition-all hover:scale-110 active:scale-95 border-4 border-white/80 animate-bounce"
           >
-            <Heart className="w-6 h-6 group-hover:scale-125 transition-transform fill-current" />
-            <span className="text-xs tracking-widest uppercase">Ver mi regalo</span>
+            <Heart className="w-5 h-5 group-hover:scale-125 transition-transform fill-current" />
+            <span className="text-[10px] tracking-widest uppercase">Ver mi regalo</span>
           </Button>
         </div>
       )}
