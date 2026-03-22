@@ -17,13 +17,13 @@ class FlowerInstance {
   constructor(width: number, height: number) {
     this.x = Math.random() * width;
     this.y = Math.random() * height;
-    this.size = 15 + Math.random() * 20;
+    this.size = 12 + Math.random() * 18; // Flores un poco más pequeñas para que quepan más
     this.rotation = Math.random() * Math.PI * 2;
     this.phase = Math.random() * Math.PI * 2;
     this.petalCount = 6 + Math.floor(Math.random() * 3);
     const yellowVariations = ['#EBCE47', '#F3D662', '#FADF7D', '#E2C439'];
     this.color = yellowVariations[Math.floor(Math.random() * yellowVariations.length)];
-    this.opacity = 0.6 + Math.random() * 0.4;
+    this.opacity = 0.7 + Math.random() * 0.3;
     this.stemColor = '#3F6212'; 
   }
 
@@ -80,16 +80,6 @@ class FlowerInstance {
     ctx.lineCap = 'round';
     ctx.stroke();
 
-    // Pequeña hoja
-    ctx.save();
-    ctx.translate(s * 0.2, s * 2);
-    ctx.rotate(Math.PI / 4);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, s * 0.4, s * 0.15, 0, 0, Math.PI * 2);
-    ctx.fillStyle = this.stemColor;
-    ctx.fill();
-    ctx.restore();
-
     // Pétalos
     ctx.fillStyle = this.color;
     const petalAngle = (Math.PI * 2) / this.petalCount;
@@ -132,8 +122,8 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // Ajuste equilibrado: divisor de 35000 para balancear cantidad y espacio
-      const targetCount = Math.floor((canvas.width * canvas.height) / 35000 * params.density);
+      // Mucho más denso: bajamos el divisor a 12000 para que aparezcan muchas más flores
+      const targetCount = Math.floor((canvas.width * canvas.height) / 12000 * params.density);
       
       if (flowersRef.current.length < targetCount) {
         const toAdd = targetCount - flowersRef.current.length;
