@@ -71,6 +71,7 @@ class FlowerInstance {
     
     const s = this.size * pulse;
 
+    // Dibujar tallo
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.quadraticCurveTo(s * 0.3, s * 1.5, s * 0.1, s * 4);
@@ -79,6 +80,7 @@ class FlowerInstance {
     ctx.lineCap = 'round';
     ctx.stroke();
 
+    // Pequeña hoja
     ctx.save();
     ctx.translate(s * 0.2, s * 2);
     ctx.rotate(Math.PI / 4);
@@ -88,6 +90,7 @@ class FlowerInstance {
     ctx.fill();
     ctx.restore();
 
+    // Pétalos
     ctx.fillStyle = this.color;
     const petalAngle = (Math.PI * 2) / this.petalCount;
     for (let i = 0; i < this.petalCount; i++) {
@@ -97,6 +100,7 @@ class FlowerInstance {
       ctx.rotate(petalAngle);
     }
 
+    // Centro de la flor
     ctx.beginPath();
     ctx.arc(0, 0, s * 0.45, 0, Math.PI * 2);
     ctx.fillStyle = '#A16207'; 
@@ -128,8 +132,8 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // Se aumenta el divisor de 25000 a 60000 para dar mucho más espacio entre flores
-      const targetCount = Math.floor((canvas.width * canvas.height) / 60000) * params.density * 2;
+      // Ajuste equilibrado: divisor de 35000 para balancear cantidad y espacio
+      const targetCount = Math.floor((canvas.width * canvas.height) / 35000 * params.density);
       
       if (flowersRef.current.length < targetCount) {
         const toAdd = targetCount - flowersRef.current.length;
@@ -144,6 +148,7 @@ export const FlowerCanvas: React.FC<FlowerCanvasProps> = ({ params, backgroundCo
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      initFlowers();
     };
 
     window.addEventListener('resize', handleResize);

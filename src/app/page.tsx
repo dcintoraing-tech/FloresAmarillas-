@@ -7,11 +7,11 @@ import { FlowerParams, BACKGROUND_OPTIONS } from '@/lib/flower-types';
 
 export default function Home() {
   const [params, setParams] = useState<FlowerParams>({
-    speed: 0.3, 
-    density: 0.4, // Se reduce la densidad a la mitad para que no estén tan juntas
+    speed: 0.25, 
+    density: 0.7, // Ajustado para un equilibrio visual óptimo
     swayMagnitude: 0.4,
     driftDirection: 'random',
-    driftSpeed: 0.03,
+    driftSpeed: 0.02,
     pulseEffect: 0.15
   });
 
