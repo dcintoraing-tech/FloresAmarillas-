@@ -8,12 +8,12 @@ import { FlowerParams, BACKGROUND_OPTIONS } from '@/lib/flower-types';
 
 export default function Home() {
   const [params, setParams] = useState<FlowerParams>({
-    speed: 0.4, // Velocidad reducida de 0.8 a 0.4 para un movimiento más lento
-    density: 1.2,
-    swayMagnitude: 0.5, // Un balanceo un poco más sutil
+    speed: 0.3, // Velocidad aún más tranquila
+    density: 0.8, // Menos densidad por defecto para mejor rendimiento
+    swayMagnitude: 0.4,
     driftDirection: 'random',
-    driftSpeed: 0.05, // Deriva más lenta
-    pulseEffect: 0.2 // Pulsación más suave
+    driftSpeed: 0.03,
+    pulseEffect: 0.15
   });
 
   const [bgIndex, setBgIndex] = useState(1);
