@@ -34,11 +34,11 @@ export default function Home() {
       />
 
       {/* Hero Header */}
-      <div className="pointer-events-none z-10 text-center space-y-6 select-none px-6 max-w-4xl">
+      <div className="pointer-events-none z-10 text-center space-y-6 select-none px-6 max-w-4xl mt-[-10vh]">
         <h1 className="text-6xl md:text-8xl font-headline font-bold text-[#8B6B00] drop-shadow-md tracking-tight">
           Un Jardín Eterno
         </h1>
-        <p className="text-[#5C4800] text-xl md:text-3xl font-medium italic leading-relaxed bg-white/20 backdrop-blur-sm py-2 px-4 rounded-full inline-block">
+        <p className="text-[#5C4800] text-xl md:text-3xl font-medium italic leading-relaxed bg-white/30 backdrop-blur-md py-3 px-6 rounded-full inline-block shadow-sm border border-white/20">
           "Flores amarillas que nunca se marchitan, como mi amor por ti."
         </p>
       </div>
@@ -56,11 +56,6 @@ export default function Home() {
         bgIndex={bgIndex}
         setBgIndex={setBgIndex}
       />
-
-      {/* Bottom hint */}
-      <div className="fixed bottom-4 text-sm text-[#8B6B00]/60 pointer-events-none font-bold uppercase tracking-widest">
-        Para mi Naomy favorita
-      </div>
     </main>
   );
 }
