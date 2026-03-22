@@ -99,7 +99,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
               className="bg-primary text-[#6D5400] hover:bg-primary/80 font-bold px-6 py-4 h-auto rounded-full w-full flex gap-2 transition-transform hover:scale-105 active:scale-95 shadow-md"
             >
               <Sparkles className="w-5 h-5" />
-              Recibir un abrazo virtual
+              Recibir un regalo especial
             </Button>
             
             <div className="flex items-center gap-2 text-xs font-bold text-[#6D5400] bg-primary/10 px-4 py-2 rounded-full">
