@@ -8,15 +8,15 @@ import { FlowerParams, BACKGROUND_OPTIONS } from '@/lib/flower-types';
 
 export default function Home() {
   const [params, setParams] = useState<FlowerParams>({
-    speed: 1.0,
-    density: 1.0,
-    swayMagnitude: 0.5,
+    speed: 0.8,
+    density: 1.2,
+    swayMagnitude: 0.6,
     driftDirection: 'random',
     driftSpeed: 0.1,
-    pulseEffect: 0.2
+    pulseEffect: 0.3
   });
 
-  const [bgIndex, setBgIndex] = useState(0);
+  const [bgIndex, setBgIndex] = useState(1);
 
   const currentBg = BACKGROUND_OPTIONS[bgIndex];
   const bgStyle = currentBg.type === 'solid' 
@@ -33,13 +33,13 @@ export default function Home() {
         }}
       />
 
-      {/* Hero Header */}
-      <div className="pointer-events-none z-10 text-center space-y-2 select-none mb-20">
-        <h1 className="text-6xl md:text-8xl font-headline font-bold text-primary drop-shadow-sm opacity-90 tracking-tight">
-          SunnyBlooms
+      {/* Hero Header - Personalized for Naomy */}
+      <div className="pointer-events-none z-10 text-center space-y-4 select-none mb-20 px-6">
+        <h1 className="text-5xl md:text-7xl font-headline font-bold text-primary drop-shadow-sm opacity-90 tracking-tight">
+          Flores para Naomy
         </h1>
-        <p className="text-foreground/60 text-lg md:text-xl font-medium">
-          Un escape tranquilo entre pétalos dorados.
+        <p className="text-foreground/70 text-lg md:text-2xl font-medium max-w-2xl mx-auto italic leading-relaxed">
+          "Porque un amor como el tuyo merece flores que nunca se marchiten."
         </p>
       </div>
 
@@ -52,7 +52,7 @@ export default function Home() {
       {/* Snoopy Guest */}
       <Snoopy />
 
-      {/* UI Controls */}
+      {/* UI Message / Controls Overlay */}
       <ControlsOverlay 
         params={params} 
         setParams={setParams} 
@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* Bottom hint */}
       <div className="fixed bottom-4 text-xs text-foreground/30 pointer-events-none font-medium">
-        Diseñado para la serenidad.
+        Hecho con todo mi amor para ti.
       </div>
     </main>
   );
