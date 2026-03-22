@@ -42,7 +42,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
                   <Heart key={i} className={`w-8 h-8 text-red-500 fill-red-500 animate-bounce delay-${i * 100}`} />
                 ))}
               </div>
-              <p className="mt-8 text-3xl font-bold text-[#6D5400] text-center">¡TE AMO NAOMY!</p>
+              <p className="mt-8 text-3xl font-bold text-[#6D5400] text-center uppercase tracking-tighter">¡TE AMO NAO!</p>
             </div>
           </div>
           <button className="absolute top-8 right-8 text-[#6D5400]">
@@ -77,7 +77,8 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
             <h2 className="font-headline font-bold text-2xl md:text-3xl text-[#6D5400]">
               Un detalle para ti
             </h2>
-            <div className="space-y-4 text-[#4A3A00] leading-relaxed text-base md:text-lg">
+            <div className="space-y-4 text-[#4A3A00] font-bold leading-relaxed text-base md:text-lg">
+              <p className="text-xl">Holi boba,</p>
               <p>
                 Hoy no pude estar allí para entregarte tus flores amarillas en mano, 
                 pero no quería que pasara el día sin que tuvieras este detalle.
@@ -87,7 +88,7 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
                 agua ni sol, porque se alimentan de lo mucho que te amo. Estarán 
                 brillando siempre para recordarte lo especial que eres en mi vida.
               </p>
-              <p className="font-bold text-[#6D5400] text-lg md:text-xl italic border-t border-[#6D5400]/10 pt-4">
+              <p className="text-[#6D5400] text-lg md:text-xl italic border-t border-[#6D5400]/10 pt-4">
                 Te amo muchísimo. Eres la luz que ilumina mi mundo.
               </p>
             </div>
@@ -111,13 +112,13 @@ export const ControlsOverlay: React.FC<ControlsOverlayProps> = ({
 
       {/* Botón Central */}
       {!isOpen && (
-        <div className="absolute top-[60%] left-1/2 -translate-x-1/2 pointer-events-auto">
+        <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pointer-events-auto">
           <Button 
             onClick={() => setIsOpen(true)}
-            className="rounded-full shadow-2xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-8 py-6 h-auto font-bold flex flex-col gap-2 group transition-all hover:scale-110 active:scale-95 border-4 md:border-8 border-white/80 animate-bounce"
+            className="rounded-full shadow-2xl bg-[#6D5400] hover:bg-[#4D3C00] text-white px-8 py-4 h-auto font-bold flex flex-col gap-1 group transition-all hover:scale-110 active:scale-95 border-4 border-white/80 animate-bounce"
           >
-            <Heart className="w-8 h-8 group-hover:scale-125 transition-transform fill-current" />
-            <span className="text-sm tracking-widest uppercase">Ver mi regalo</span>
+            <Heart className="w-6 h-6 group-hover:scale-125 transition-transform fill-current" />
+            <span className="text-xs tracking-widest uppercase">Ver mi regalo</span>
           </Button>
         </div>
       )}
